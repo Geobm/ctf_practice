@@ -16,7 +16,7 @@ r = remote(host,port)
 
 def gen_payload(size,data=""):
     timestamp = time.time()
-    noise = os.urandom(8)
+    noise = os.urandom(50)
     m = hashlib.sha256()
     m.update("meiyoumima")
     m.update(p64(timestamp))
